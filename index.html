@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HiFi — Highest Fidelity</title>
+<meta name="description" content="HiFi Übungsfirma — Produktkatalog mit MacBooks, Macs, Displays und Zubehör. Kein echtes Unternehmen, keine echten Produkte.">
+<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<div class="noise-overlay" aria-hidden="true"></div>
+
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="#top" class="brand">
+      <img src="assets/logo-mark.png" alt="HiFi Logo" class="brand-logo">
+    </a>
+    <nav class="main-nav" aria-label="Hauptnavigation">
+      <a href="#notebooks">Notebooks</a>
+      <a href="#desktops">Desktops</a>
+      <a href="#displays">Displays</a>
+      <a href="#zubehoer">Zubehör</a>
+    </nav>
+    <a href="#produkte" class="btn btn-primary btn-small">Alle Produkte</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <img src="assets/logo.png" alt="HiFi — Highest Fidelity" class="hero-logo" id="heroLogo">
+      <h1 class="hero-title" id="heroTitle">Kompromisslose Leistung.<br>Kompromisslose Klarheit.</h1>
+      <p class="hero-sub" id="heroSub">Die HiFi Produktwelt — von leistungsstarken Notebooks bis zu präzisem Zubehör. Übersichtlich. Ehrlich. Ohne Schnickschnack.</p>
+      <div class="hero-actions" id="heroActions">
+        <a href="#produkte" class="btn btn-primary">Produkte entdecken</a>
+        <a href="#zubehoer" class="btn btn-ghost">Zubehör ansehen</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRO STRIP -->
+  <section class="intro-strip">
+    <div class="intro-inner">
+      <div class="intro-item">
+        <span class="intro-num">12</span>
+        <span class="intro-label">Produkte im Katalog</span>
+      </div>
+      <div class="intro-divider" aria-hidden="true"></div>
+      <div class="intro-item">
+        <span class="intro-num">4</span>
+        <span class="intro-label">Kategorien</span>
+      </div>
+      <div class="intro-divider" aria-hidden="true"></div>
+      <div class="intro-item">
+        <span class="intro-num">100%</span>
+        <span class="intro-label">Übungsprojekt</span>
+      </div>
+    </div>
+  </section>
+
+  <div id="produkte">
+
+  <!-- NOTEBOOKS -->
+  <section class="category" id="notebooks">
+    <div class="category-inner">
+      <div class="category-head">
+        <span class="tag"><span class="tag-chip"></span>Notebooks</span>
+        <h2>MacBooks</h2>
+        <p>Mobile Höchstleistung für kreative und professionelle Anwendungen.</p>
+      </div>
+      <div class="product-grid">
+
+        <article class="product-card">
+          <div class="product-media">
+            <img src="assets/products/macbook-pro-16-max.jpg" alt="MacBook Pro 16&quot; M4 Max" loading="lazy">
+          </div>
+          <div class="product-category">MacBook Pro 16"</div>
+          <h3 class="product-name">MacBook Pro 16" M4 Max</h3>
+          <p class="product-desc">High-End-MacBook für professionelle Video-, Foto- und 3D-Bearbeitung mit maximaler Leistung.</p>
+          <div class="product-price">3.999&nbsp;€</div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-media">
+            <img src="assets/products/macbook-pro-14.jpg" alt="MacBook Pro 14&quot; M4 Max" loading="lazy">
+          </div>
+          <div class="product-category">MacBook Pro 14"</div>
+          <h3 class="product-name">MacBook Pro 14" M4 Max</h3>
+          <p class="product-desc">Kompaktes Profi-Notebook mit extrem hoher Leistung und brillantem Liquid-Retina-XDR-Display.</p>
+          <div class="product-price">3.499&nbsp;€</div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-media">
+            <img src="assets/products/macbook-pro-16-pro.jpg" alt="MacBook Pro 16&quot; M4 Pro" loading="lazy">
+          </div>
+          <div class="product-category">MacBook Pro 16"</div>
+          <h3 class="product-name">MacBook Pro 16" M4 Pro</h3>
+          <p class="product-desc">Leistungsstarkes 16-Zoll-MacBook für anspruchsvolle professionelle Anwendungen.</p>
+          <div class="product-price">3.099&nbsp;€</div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-media">
+            <img src="assets/products/macbook-air-15.jpg" alt="MacBook Air 15&quot;" loading="lazy">
+          </div>
+          <div class="product-category">MacBook Air 15"</div>
+          <h3 class="product-name">MacBook Air 15"</h3>
+          <p class="product-desc">Großes, schlankes MacBook für anspruchsvolle Büroarbeiten, Studium und kreative Projekte.</p>
+          <div class="product-price">1.899&nbsp;€</div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- DESKTOPS -->
+  <section class="category alt" id="desktops">
+    <div class="category-inner">
+      <div class="category-head">
+        <span class="tag"><span class="tag-chip"></span>Desktops</span>
+        <h2>Mac Desktops</h2>
+        <p>Maximale Rechenleistung für Studio, Büro und Workstation.</p>
+      </div>
+      <div class="product-grid">
+
+        <article class="product-card">
+          <div class="product-media">
+            <img src="assets/products/mac-studio.png" alt="Mac Studio M4 Max" loading="lazy">
+          </div>
+          <div class="product-category">Mac</div>
+          <h3 class="product-name">Mac Studio M4 Max</h3>
+          <p class="product-desc">Kompakter Profi-Desktop mit enormer Rechenleistung für Kreative und professionelle Anwender.</p>
+          <div class="product-price">3.499&nbsp;€</div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-media">
+            <img src="assets/products/imac-24.webp" alt="iMac 24&quot; High-End" loading="lazy">
+          </div>
+          <div class="product-category">Mac</div>
+          <h3 class="product-name">iMac 24" High-End</h3>
+          <p class="product-desc">Eleganter All-in-One-Desktop mit hochauflösendem 24-Zoll-Display und leistungsstarkem Apple Chip.</p>
+          <div class="product-price">2.299&nbsp;€</div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-media">
+            <img src="assets/products/mac-pro.webp" alt="Mac Pro" loading="lazy">
+          </div>
+          <div class="product-category">Mac</div>
+          <h3 class="product-name">Mac Pro</h3>
+          <p class="product-desc">Professioneller Desktop für besonders anspruchsvolle Workflows und maximale Erweiterbarkeit.</p>
+          <div class="product-price">7.499&nbsp;€</div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- DISPLAYS -->
+  <section class="category" id="displays">
+    <div class="category-inner">
+      <div class="category-head">
+        <span class="tag"><span class="tag-chip"></span>Displays</span>
+        <h2>Displays</h2>
+        <p>Referenzqualität für professionelle Bild- und Videoarbeit.</p>
+      </div>
+      <div class="product-grid product-grid-single">
+
+        <article class="product-card">
+          <div class="product-media">
+            <img src="assets/products/pro-display-xdr.jpg" alt="Pro Display XDR" loading="lazy">
+          </div>
+          <div class="product-category">Profi-Display</div>
+          <h3 class="product-name">Pro Display XDR</h3>
+          <p class="product-desc">Hochauflösendes 32-Zoll-Profi-Display für professionelle Bild-, Video- und Designarbeit.</p>
+          <div class="product-price">5.499&nbsp;€</div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ZUBEHÖR -->
+  <section class="category alt" id="zubehoer">
+    <div class="category-inner">
+      <div class="category-head">
+        <span class="tag"><span class="tag-chip"></span>Zubehör</span>
+        <h2>Zubehör</h2>
+        <p>Durchdacht designt, perfekt abgestimmt auf jedes HiFi Gerät.</p>
+      </div>
+      <div class="product-grid">
+
+        <article class="product-card">
+          <div class="product-media">
+            <img src="assets/products/airpods-max.webp" alt="AirPods Max" loading="lazy">
+          </div>
+          <div class="product-category">Audio</div>
+          <h3 class="product-name">AirPods Max</h3>
+          <p class="product-desc">Hochwertige Over-Ear-Kopfhörer mit starkem Klang, ANC und elegantem Aluminiumdesign.</p>
+          <div class="product-price">599&nbsp;€</div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-media">
+            <img src="assets/products/magic-mouse.avif" alt="Magic Mouse" loading="lazy">
+          </div>
+          <div class="product-category">Eingabe</div>
+          <h3 class="product-name">Magic Mouse</h3>
+          <p class="product-desc">Kabellose Multi-Touch-Maus im minimalistischen Apple-Design.</p>
+          <div class="product-price">99&nbsp;€</div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-media">
+            <img src="assets/products/magic-keyboard.png" alt="Magic Keyboard" loading="lazy">
+          </div>
+          <div class="product-category">Eingabe</div>
+          <h3 class="product-name">Magic Keyboard</h3>
+          <p class="product-desc">Schlanke kabellose Tastatur mit hochwertigem Tippgefühl und elegantem Design.</p>
+          <div class="product-price">129&nbsp;€</div>
+        </article>
+
+        <article class="product-card">
+          <div class="product-media">
+            <img src="assets/products/usbc-cable.webp" alt="USB-C Ladekabel 2 m" loading="lazy">
+          </div>
+          <div class="product-category">Kabel</div>
+          <h3 class="product-name">USB-C Ladekabel 2 m</h3>
+          <p class="product-desc">Hochwertiges USB-C-Kabel zum Laden und Verbinden kompatibler Apple-Geräte.</p>
+          <div class="product-price">20&nbsp;€</div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  </div>
+
+  <!-- CTA BAND -->
+  <section class="cta-band">
+    <div class="cta-inner">
+      <h2>HiFi. Highest Fidelity.</h2>
+      <p>Ein Übungsprojekt — gestaltet mit dem Anspruch echter Produktqualität.</p>
+      <a href="#top" class="btn btn-primary">Nach oben</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <img src="assets/logo-mark.png" alt="HiFi Logo" class="footer-logo">
+      <nav class="footer-nav" aria-label="Footer Navigation">
+        <a href="#notebooks">Notebooks</a>
+        <a href="#desktops">Desktops</a>
+        <a href="#displays">Displays</a>
+        <a href="#zubehoer">Zubehör</a>
+      </nav>
+    </div>
+
+    <div class="disclaimer" role="note">
+      <svg class="disclaimer-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 9v4M12 16.5h.01M10.3 3.9 2.6 17.1A2 2 0 0 0 4.3 20h15.4a2 2 0 0 0 1.7-2.9L13.7 3.9a2 2 0 0 0-3.4 0Z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <p><strong>Wichtiger Hinweis:</strong> HiFi ist <strong>keine echte Firma</strong>. Diese Website ist ein <strong>Übungsprojekt</strong> zu Lern- und Demonstrationszwecken. Alle gezeigten Produkte, Preise, Beschreibungen und Inhalte sind <strong>frei erfunden</strong> und stehen in keinem Zusammenhang mit Apple Inc. oder einem anderen realen Unternehmen. Es findet kein echter Verkauf statt.</p>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 HiFi — Übungsfirma. Alle Rechte vorbehalten (fiktiv).</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
