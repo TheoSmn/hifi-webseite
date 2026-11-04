@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>HiFi Admin — Lager</title>
+<link rel="icon" type="image/png" href="../assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<!-- LOGIN -->
+<main class="login" id="loginView" hidden>
+  <form class="login-card" id="loginForm" autocomplete="on">
+    <img src="../assets/logo.png" alt="HiFi — Highest Fidelity" class="login-logo">
+    <h1>Admin-Bereich</h1>
+    <p class="muted">Bitte mit deinem HiFi Account anmelden.</p>
+    <label>Benutzername
+      <input name="username" autocomplete="username" required autofocus>
+    </label>
+    <label>Passwort
+      <input name="password" type="password" autocomplete="current-password" required>
+    </label>
+    <p class="error" id="loginError" role="alert"></p>
+    <button class="btn btn-primary" type="submit">Anmelden</button>
+    <a class="back-link" href="../">← Zur Webseite</a>
+  </form>
+</main>
+
+<!-- ADMIN -->
+<div id="adminView" hidden>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a href="../" class="brand"><img src="../assets/logo-mark.png" alt="HiFi" class="brand-logo"></a>
+      <span class="topbar-title">Admin · Lager</span>
+      <span class="user" id="userName"></span>
+      <button class="btn btn-ghost btn-small" id="logoutBtn" type="button">Abmelden</button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="head">
+      <div>
+        <h1>Lagerliste 2026/27</h1>
+        <p class="muted">Alle Accounts sehen und bearbeiten dieselbe Liste. Brutto (+20 % USt.) und Lagerbestand werden automatisch berechnet.</p>
+      </div>
+      <div class="head-actions">
+        <input type="search" id="search" placeholder="Suchen …" aria-label="Lagerliste durchsuchen">
+        <button class="btn btn-ghost btn-small" id="refreshBtn" type="button">Aktualisieren</button>
+        <button class="btn btn-primary btn-small" id="addBtn" type="button">+ Neuer Artikel</button>
+      </div>
+    </section>
+
+    <section class="stats" id="stats"></section>
+
+    <p class="error banner" id="tableError" role="alert" hidden></p>
+
+    <div class="table-scroll">
+      <table class="lager">
+        <thead>
+          <tr>
+            <th>Artikelnr.</th>
+            <th>Produkt Name</th>
+            <th class="num">Einkaufspreis Netto</th>
+            <th class="num">Verkaufspreis Netto</th>
+            <th class="num">Verkaufspreis Brutto</th>
+            <th class="num">Eingekauft</th>
+            <th class="num">Verkauft</th>
+            <th class="num">Aktuell im Lager</th>
+            <th class="actions-col"><span class="sr-only">Aktionen</span></th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+        <tfoot id="totals"></tfoot>
+      </table>
+    </div>
+    <p class="muted small" id="lastSync"></p>
+  </main>
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>

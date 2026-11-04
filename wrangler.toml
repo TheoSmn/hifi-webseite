@@ -1,0 +1,9 @@
+name = "highest-fidelity"
+pages_build_output_dir = "."
+compatibility_date = "2025-06-01"
+
+# Zähler für die Chat-Limits (siehe functions/api/chat.js)
+[[d1_databases]]
+binding = "DB"
+database_name = "hifi-chat"
+database_id = "5c21b0cf-8445-441f-aa27-c5dfa722e032"
