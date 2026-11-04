@@ -109,10 +109,10 @@
       <td class="num">${int.format(it.eingekauft)}</td>
       <td class="num">${int.format(it.verkauft)}</td>
       <td class="num">${stockBadge(stockOf(it))}</td>
-      <td class="actions">
+      <td class="actions"><div class="row-actions">
         <button class="icon-btn" data-action="edit" type="button">Bearbeiten</button>
         <button class="icon-btn danger" data-action="delete" type="button">Löschen</button>
-      </td>
+      </div></td>
     </tr>`;
   }
 
@@ -128,10 +128,10 @@
       <td class="num"><input class="n" name="eingekauft" type="number" min="0" step="1" value="${esc(v.eingekauft)}" required></td>
       <td class="num"><input class="n" name="verkauft" type="number" min="0" step="1" value="${esc(v.verkauft)}" required></td>
       <td class="num calc" data-calc="lager"></td>
-      <td class="actions">
+      <td class="actions"><div class="row-actions">
         <button class="icon-btn save" data-action="save" type="button">Speichern</button>
         <button class="icon-btn" data-action="cancel" type="button">Abbrechen</button>
-      </td>
+      </div></td>
     </tr>`;
   }
 
