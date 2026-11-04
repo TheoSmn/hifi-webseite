@@ -5,6 +5,7 @@
 
   let items = [];
   let editingId = null; // Zahl = bestehender Eintrag, "new" = neuer Eintrag
+  let bookingId = null; // Artikel, unter dem die Buchungszeile offen ist
   let filter = "";
 
   const eur = new Intl.NumberFormat("de-AT", { style: "currency", currency: "EUR" });
@@ -68,6 +69,7 @@
     try { await api("/api/admin/logout", { method: "POST" }); } catch {}
     items = [];
     editingId = null;
+    bookingId = null;
     showLogin();
   });
 
@@ -108,8 +110,15 @@
       <td class="num">${eur.format(it.vk_netto * MWST)}</td>
       <td class="num">${int.format(it.eingekauft)}</td>
       <td class="num">${int.format(it.verkauft)}</td>
-      <td class="num">${stockBadge(stockOf(it))}</td>
+      <td class="num"><div class="stock-ctl">
+        <button class="step" data-action="minus" type="button" title="1 Stück verkauft" aria-label="1 Stück verkauft"${
+          stockOf(it) <= 0 ? " disabled" : ""
+        }>−</button>
+        ${stockBadge(stockOf(it))}
+        <button class="step" data-action="plus" type="button" title="1 Stück eingekauft" aria-label="1 Stück eingekauft">+</button>
+      </div></td>
       <td class="actions"><div class="row-actions">
+        <button class="icon-btn book${it.id === bookingId ? " active" : ""}" data-action="book" type="button">Buchen</button>
         <button class="icon-btn" data-action="edit" type="button">Bearbeiten</button>
         <button class="icon-btn danger" data-action="delete" type="button">Löschen</button>
       </div></td>
@@ -135,6 +144,20 @@
     </tr>`;
   }
 
+  // Zeile unter einem Artikel, um eine größere Menge ein- oder auszubuchen
+  function bookingRow(it) {
+    return `<tr class="booking" data-id="${it.id}">
+      <td colspan="9"><div class="booking-inner">
+        <strong>Buchung: ${esc(it.name)}</strong>
+        <label>Menge <input class="n" name="menge" type="number" min="1" step="1" value="1"></label>
+        <button class="icon-btn save" data-action="book-einkauf" type="button">+ Eingekauft buchen</button>
+        <button class="icon-btn save sell" data-action="book-verkauf" type="button">− Verkauft buchen</button>
+        <button class="icon-btn" data-action="book-cancel" type="button">Abbrechen</button>
+        <span class="muted booking-hint">Im Lager: ${int.format(stockOf(it))} Stück</span>
+      </div></td>
+    </tr>`;
+  }
+
   function render() {
     const q = filter.trim().toLowerCase();
     const visible = q
@@ -142,7 +165,11 @@
       : items;
 
     let html = editingId === "new" ? editRow(null) : "";
-    html += visible.map((it) => (it.id === editingId ? editRow(it) : viewRow(it))).join("");
+    html += visible
+      .map((it) =>
+        it.id === editingId ? editRow(it) : viewRow(it) + (it.id === bookingId ? bookingRow(it) : "")
+      )
+      .join("");
     if (!html) {
       html = `<tr class="empty-row"><td colspan="9">${
         q ? "Keine Treffer." : "Noch keine Artikel – lege mit „+ Neuer Artikel“ einen an."
@@ -183,6 +210,50 @@
       updateCalc(editing);
       editing.querySelector("input").focus();
     }
+    const booking = $("rows").querySelector("tr.booking input");
+    if (booking) booking.select();
+  }
+
+  /* ---------- Buchungen (Einkauf / Verkauf) ---------- */
+  let toastTimer;
+  function toast(msg) {
+    const el = $("toast");
+    el.textContent = msg;
+    el.hidden = false;
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => (el.hidden = true), 3500);
+  }
+
+  async function book(id, art, menge) {
+    const it = items.find((x) => x.id === id);
+    try {
+      const { item } = await api(`/api/lager/${id}`, {
+        method: "POST",
+        body: JSON.stringify({ art, menge }),
+      });
+      items = items.map((x) => (x.id === item.id ? item : x));
+      if (bookingId === id) bookingId = null;
+      setError("");
+      render();
+      toast(
+        `${int.format(menge)} × ${item.name} als ${art === "einkauf" ? "eingekauft" : "verkauft"} gebucht – ` +
+          `jetzt ${int.format(stockOf(item))} im Lager.`
+      );
+    } catch (err) {
+      setError(it ? `${it.name}: ${err.message}` : err.message);
+    }
+  }
+
+  function bookFromRow(tr, art) {
+    const input = tr.querySelector('[name="menge"]');
+    const menge = Number(input.value);
+    if (!Number.isInteger(menge) || menge < 1) {
+      input.setCustomValidity("Bitte eine ganze Zahl ab 1 eingeben");
+      input.reportValidity();
+      input.setCustomValidity("");
+      return;
+    }
+    book(Number(tr.dataset.id), art, menge);
   }
 
   function updateCalc(tr) {
@@ -195,6 +266,7 @@
   function startEdit(id) {
     if (editingId !== null && editingId !== id && !confirm("Ungespeicherte Änderungen verwerfen?")) return;
     editingId = id;
+    bookingId = null;
     render();
   }
 
@@ -246,6 +318,17 @@
     else if (action === "delete") remove(id);
     else if (action === "save") save(tr);
     else if (action === "cancel") { editingId = null; render(); }
+    else if (action === "plus") book(id, "einkauf", 1);
+    else if (action === "minus") book(id, "verkauf", 1);
+    else if (action === "book") {
+      if (editingId !== null && !confirm("Ungespeicherte Änderungen verwerfen?")) return;
+      editingId = null;
+      bookingId = bookingId === id ? null : id;
+      render();
+    }
+    else if (action === "book-einkauf") bookFromRow(tr, "einkauf");
+    else if (action === "book-verkauf") bookFromRow(tr, "verkauf");
+    else if (action === "book-cancel") { bookingId = null; render(); }
   });
 
   $("rows").addEventListener("input", (e) => {
@@ -254,6 +337,8 @@
   });
 
   $("rows").addEventListener("keydown", (e) => {
+    const bookingTr = e.target.closest("tr.booking");
+    if (bookingTr && e.key === "Escape") { bookingId = null; render(); return; }
     const tr = e.target.closest("tr.editing");
     if (!tr) return;
     if (e.key === "Enter") { e.preventDefault(); save(tr); }
@@ -268,6 +353,7 @@
   $("refreshBtn").addEventListener("click", () => {
     if (editingId !== null && !confirm("Ungespeicherte Änderungen verwerfen?")) return;
     editingId = null;
+    bookingId = null;
     load();
   });
   $("search").addEventListener("input", (e) => {
@@ -277,7 +363,7 @@
 
   // Änderungen der anderen Accounts automatisch holen (nicht während man selbst bearbeitet)
   setInterval(() => {
-    if (!$("adminView").hidden && editingId === null && !document.hidden) load();
+    if (!$("adminView").hidden && editingId === null && bookingId === null && !document.hidden) load();
   }, 30000);
 
   /* ---------- Start ---------- */
